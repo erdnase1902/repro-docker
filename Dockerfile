@@ -4,4 +4,5 @@ RUN apt-get update; apt-get install -y build-essential git debhelper gperf libas
 RUN git clone https://github.com/resiprocate/resiprocate.git
 RUN cd resiprocate; cd repro; cp -rf ../contrib/cajun/include/cajun /usr/include/; cd ..; \
 autoreconf --install; ./configure --with-repro --disable-shared; make -j8; make install; cd ..
+RUN cd resiprocate/repro; sed -i '/HttpBindAddress /s/^/#/' repro.config
 CMD cd resiprocate/repro; repro;
